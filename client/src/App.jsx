@@ -4,9 +4,12 @@ import "./assets/scss/main.scss"
 import Layout from "./layout";
 import Home from "./pages/home";
 import Shop from "./pages/shop";
+import Overlay from "./components/overlay";
+
 
 function App() {
   return <>
+  <Overlay/>
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout/>}>

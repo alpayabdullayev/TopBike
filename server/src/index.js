@@ -5,6 +5,9 @@ import mongoose from 'mongoose'
 import { ServicesRoutes } from './routes/servicesRoutes.js'
 import cloudinary from 'cloudinary'
 import { HeroSliderRouter } from './routes/heroSliderRoutes.js'
+import { CollectionRouter } from './routes/collectionsRoutes.js'
+import { AuthRoutes } from './routes/authRoutes.js'
+import { UserRoutes } from './routes/usersRoutes.js'
 dotenv.config()
 
 cloudinary.config({
@@ -40,6 +43,9 @@ mongoose
 
 app.use('/api', ServicesRoutes)
 app.use('/api', HeroSliderRouter)
+app.use('/api', CollectionRouter)
+app.use('/api', AuthRoutes)
+app.use('/api', UserRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server Connection ${PORT}`)

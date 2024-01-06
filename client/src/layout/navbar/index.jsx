@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { CiSearch } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
+import { CiUser } from "react-icons/ci";
+import { ClickContext } from "../../context/ClickContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const {handleModal} = useContext(ClickContext)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,7 +24,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed w-full py-6 duration-500 z-20 ${
+        className={`fixed w-full py-6 duration-500 z-20 hidden lg:block ${
           isScrolled ? "bg-black opacity-80 top-0 left-0 right-0" : ""
         }`}
       >
@@ -39,9 +42,10 @@ const Navbar = () => {
                 <NavLink to="/shop">Shop</NavLink>
                 <div className=" wrapper flex justify-between   gap-6 text-lg py-6 px-4 opacity-0 invisible translate-y-[0] group-hover:translate-y-[-10px] duration-300 group-hover:opacity-100 group-hover:visible fixed w-full top-20  left-0 right-0    z-10 bg-white">
                   <ul className="text-black">
-                    <h1 className="text-2xl font-bold  text-black">
-                      <NavLink to="/shop">Shop Layout</NavLink>
-                    </h1>
+                      <h1 className="text-2xl font-bold  text-black relative">
+                        <NavLink to="/shop">Shop Layout</NavLink>
+                        <span class="absolute left-0 bottom-0 w-1/2 border-b-2 border-yellow-500 transition-width duration-400"></span>
+                      </h1>
                     <li>Pagination</li>
                     <li>Ajax Loading</li>
                     <li>List Wiev</li>
@@ -51,7 +55,8 @@ const Navbar = () => {
                   </ul>
 
                   <ul className="text-black">
-                  <h1 className="text-2xl font-bold text-zinc-700">
+                  <h1 className="text-2xl font-bold text-zinc-700 relative">
+                        <span class="absolute left-0 bottom-0 w-1/2 border-b-2 border-yellow-500 transition-width duration-400"></span>
                       <NavLink to="/shop">Shop Heading</NavLink>
                     </h1>
                     <li>Pagination</li>
@@ -62,8 +67,10 @@ const Navbar = () => {
                     <li>Sidebar layout</li>
                   </ul>
                   <ul className="text-black">
-                  <h1 className="text-2xl font-bold text-zinc-700">
+                  <h1 className="text-2xl font-bold text-zinc-700 relative">
                       <NavLink to="/shop">Filter Layout</NavLink>
+                      <span class="absolute left-0 bottom-0 w-1/2 border-b-2 border-yellow-500 transition-width duration-400"></span>
+
                     </h1>
                     <li>Pagination</li>
                     <li>Ajax Loading</li>
@@ -73,8 +80,10 @@ const Navbar = () => {
                     <li>Sidebar layout</li>
                   </ul>
                   <ul className="text-black">
-                  <h1 className="text-2xl font-bold text-zinc-700">
+                  <h1 className="text-2xl font-bold text-zinc-700 relative">
                       <NavLink to="/shop">Product Layout</NavLink>
+                      <span class="absolute left-0 bottom-0 w-1/2 border-b-2 border-yellow-500 transition-width duration-400"></span>
+
                     </h1>
                     <li>Pagination</li>
                     <li>Ajax Loading</li>
@@ -89,8 +98,10 @@ const Navbar = () => {
                     <li>Sidebar layout</li>
                   </ul>
                   <ul className="text-black">
-                  <h1 className="text-2xl font-bold text-zinc-700">
+                  <h1 className="text-2xl font-bold text-zinc-700 relative">
                       <NavLink to="/shop">Product Type</NavLink>
+                      <span class="absolute left-0 bottom-0 w-1/2 border-b-2 border-yellow-500 transition-width duration-400"></span>
+
                     </h1>
                     <li>Pagination</li>
                     <li>Ajax Loading</li>
@@ -100,8 +111,10 @@ const Navbar = () => {
                     <li>Sidebar layout</li>
                   </ul>
                   <ul className="text-black">
-                  <h1 className="text-2xl font-bold text-zinc-700">
+                  <h1 className="text-xl font-bold text-zinc-700 relative">
                       <NavLink to="/shop">Product Extends</NavLink>
+                      <span class="absolute left-0 bottom-0 w-1/2 border-b-2 border-yellow-500 transition-width duration-400"></span>
+
                     </h1>
                     <li>Pagination</li>
                     <li>Ajax Loading</li>
@@ -125,8 +138,8 @@ const Navbar = () => {
               <li>
                 <CiSearch />
               </li>
-              <li>
-                <CiSearch />
+              <li onClick={handleModal}>
+              <CiUser />
               </li>
               <li>
                 <CiSearch />

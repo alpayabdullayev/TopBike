@@ -21,7 +21,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="bghero">
+    <div className="">
       <Swiper
         spaceBetween={30}
         effect={"fade"}
@@ -36,7 +36,7 @@ const Hero = () => {
         {data &&
           data.map((item) => (
             <SwiperSlide className="" key={item._id}>
-              <div className={` z-10  min-h-[100vh] bg-no-repeat bg-center bg-cover flex justify-between items-center flex-wrap`} style={{ backgroundImage: `url("${item.image}")` }}>
+              <div className={` z-[1]  min-h-[100vh] bg-no-repeat bg-center bg-cover flex justify-between items-center flex-wrap`} style={{ backgroundImage: `url("${item.image}")` }}>
                 <div className="wrapper py-20">
                   <h1 className="text-white font-semibold [font-size:_clamp(2em,5vw,10em)]">
                     {item.title}
