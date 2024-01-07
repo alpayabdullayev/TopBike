@@ -15,7 +15,7 @@ const ProductSchema = new Schema(
     tags: [{ type: Schema.Types.ObjectId, ref: 'topBikeTags' }],
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
     isNewBu: { type: Boolean, default: true }, 
-  },
+  },    
   { timestamps: true }
 );
 
