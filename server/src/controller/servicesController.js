@@ -52,7 +52,6 @@ export const createServices = async (req, res) => {
       .status(201)
       .json({ message: "Service added successfully", service: newService });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -74,3 +73,39 @@ export const deleteServiceById = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const updateService = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description } = req.body;
+
+    if (!name || !description) {
+      return res
+        .status(400)
+        .json({ error: "Name and description are required fields" });
+    }
+
+    const service = await Services.findById(id);
+
+    if (!service) {
+      return res.status(404).json({ error: "Service not found" });
+    }
+
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path);
+      service.image = result.secure_url;
+    }
+
+    service.name = name;
+    service.description = description;
+
+   
+    await service.save();
+
+    res.json({ message: "Service updated successfully", service });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+

@@ -21,7 +21,8 @@ const UserSchema = new Schema(
       },
     ],
     wishlist: [{product: { type: mongoose.Schema.Types.ObjectId, ref: 'topBikeProducts' }}],
-    comments: [ { comment :{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }}],
+    comments: [ { comment :{ type: mongoose.Schema.Types.ObjectId, ref: 'topBikeComments' }}],
+    isVerified : {type : Boolean , default : false}
 
   },
   { timestamps: true }

@@ -8,6 +8,7 @@ import { HeroSliderRouter } from './routes/heroSliderRoutes.js'
 import { CollectionRouter } from './routes/collectionsRoutes.js'
 import { AuthRoutes } from './routes/authRoutes.js'
 import { UserRoutes } from './routes/usersRoutes.js'
+import { CategoryRoutes } from './routes/categoryRoutes.js'
 dotenv.config()
 
 cloudinary.config({
@@ -46,6 +47,7 @@ app.use('/api', HeroSliderRouter)
 app.use('/api', CollectionRouter)
 app.use('/api', AuthRoutes)
 app.use('/api', UserRoutes)
+app.use("/api",CategoryRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server Connection ${PORT}`)

@@ -2,6 +2,7 @@ import User from "../models/userSchema.js";
 import productSchema from "../models/productSchema.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import commmentSchema from "../models/commmentSchema.js";
 
 export const getAllUsers = async (req, res) => {
   try {
@@ -63,5 +64,43 @@ export const deleteUser = async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
+export const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { username, password, role, age, avatar } = req.body;
+
+    const isOwnProfile = res.user.userId === id;
+
+    if (!isOwnProfile && res.user.role !== 'admin' && res.user.role !== 'superAdmin') {
+      return res.status(403).json({ message: 'error' });
+    }
+
+    const updateUser = await User.findById(id);
+
+    if (updateUser) {
+      if (isOwnProfile) {
+        updateUser.username = username;
+        const round = 10;
+        const hashedPassword = await bcrypt.hash(password, round);
+        updateUser.password = hashedPassword;
+        updateUser.avatar = avatar;
+        updateUser.age = age;
+      }
+
+      if (res.user.role === 'admin' || res.user.role === 'superAdmin') {
+        updateUser.role = role;
+      }
+
+      await updateUser.save();
+      res.status(200).json({ updateUser });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };

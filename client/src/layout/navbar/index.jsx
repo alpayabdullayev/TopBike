@@ -3,10 +3,24 @@ import { CiSearch } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { ClickContext } from "../../context/ClickContext";
+import { UserContext } from "../../context/userContext";
+import { IoIosLogOut } from "react-icons/io";
+import { RiAdminFill } from "react-icons/ri";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const {handleModal} = useContext(ClickContext)
+  const { user, setUser, role, setRole, setToken } = useContext(UserContext);
+
+  const removeStorage = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("username");
+    setToken(null);
+    setRole(null);
+    setUser(null);
+    setBasket(null);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -138,9 +152,28 @@ const Navbar = () => {
               <li>
                 <CiSearch />
               </li>
-              <li onClick={handleModal}>
-              <CiUser />
-              </li>
+
+
+              {
+                role ? (
+                  <>
+                  <NavLink to='/profile'><li >
+                  <CiUser />
+                  </li></NavLink>
+
+                  <li onClick={() => removeStorage()}><IoIosLogOut /></li>
+                  </>
+                  
+                ) : (              <li onClick={handleModal}>
+                  <CiUser />
+                  </li>)
+              }
+
+              {
+                role === 'admin' || role=== "superAdmin" ? (<li>
+                  <NavLink to={"/admin"}><RiAdminFill /></NavLink>
+                </li>) : null
+              }
               <li>
                 <CiSearch />
               </li>
